@@ -3,13 +3,12 @@ package com.mjc.school.repository;
 import com.mjc.school.repository.model.BaseEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface BaseRepository<T extends BaseEntity<K>, K> {
 
     List<T> readAll();
 
-    Optional<T> readById(K id);
+    T readById(K id);
 
     T create(T entity);
 
@@ -18,4 +17,5 @@ public interface BaseRepository<T extends BaseEntity<K>, K> {
     boolean deleteById(K id);
 
     boolean existById(K id);
+    T findById(K id);
 }

@@ -25,13 +25,20 @@ subprojects {
         testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
         testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
         testImplementation "com.tngtech.archunit:archunit:$archUnitVersion"
+
+        compileOnly 'org.projectlombok:lombok:1.18.26'
+        annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+        testCompileOnly 'org.projectlombok:lombok:1.18.26'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
     }
     test {
         useJUnitPlatform()
     }
 }
 
-task repack(type: Jar, dependsOn: ':module-main:build') {
+tasks.register('repack', Jar) {
+    dependsOn ':module-main:build'
     if (findProject(':module-main') != null) {
         entryCompression = ZipEntryCompression.STORED
         def buildJar = zipTree("${project(':module-main').buildDir}/libs/module-main.jar")
