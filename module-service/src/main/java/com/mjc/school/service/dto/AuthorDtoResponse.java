@@ -1,6 +1,8 @@
 package com.mjc.school.service.dto;
 
 import lombok.*;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 

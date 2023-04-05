@@ -1,6 +1,5 @@
-package com.mjc.school.main;
+package com.mjc.school.controller;
 
-import com.mjc.school.controller.BaseController;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;
 import com.mjc.school.service.dto.NewsDtoRequest;
@@ -74,24 +73,8 @@ public class CrudImpl {
                 String content = scanner.nextLine();
                 System.out.print("Enter author ID: ");
                 id = this.isValidId(scanner.nextLine());
-                newsController.create(new NewsDtoRequest(title, content, id));
-                break;
-            case "9":
-                System.out.print("Enter news TITLE: ");
-                title = scanner.nextLine();
-                System.out.print("Enter news CONTENT: ");
-                content = scanner.nextLine();
-                System.out.print("Enter author ID: ");
-                id = this.isValidId(scanner.nextLine());
-                newsController.update(new NewsDtoRequest(title, content, id));
-                System.out.println("SUCCESS");
-                break;
-            case "10":
-                System.out.print("Enter news ID: ");
-                id = this.isValidId(scanner.nextLine());
-                newsController.deleteById(id);
-                System.out.println("SUCCESS");
-
+                var newsDto = new NewsDtoRequest(title, content, id);
+                newsController.create(newsDto);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.mjc.school.main;
 
 import com.mjc.school.config.ProjectConfig;
+import com.mjc.school.controller.CrudImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
@@ -11,6 +12,7 @@ public class Main {
            var crud = c.getBean(CrudImpl.class);
            while (true) {
                crud.implementCrud();
+
            }
         }
     }
