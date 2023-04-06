@@ -13,15 +13,16 @@ import java.util.List;
 
 @Component("newsController")
 public class NewsContoller implements BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
-
-    @Autowired
-    @Qualifier("newsService")
-    private BaseService<NewsDtoRequest, NewsDtoResponse, Long> model;
-
-    @Autowired
-    @Qualifier("newsView")
-    private View<NewsDtoResponse, List<NewsDtoResponse>> view;
+    private final BaseService<NewsDtoRequest, NewsDtoResponse, Long> model;
+    private final View<NewsDtoResponse, List<NewsDtoResponse>> view;
     private NewsDtoResponse news;
+
+    @Autowired
+    public NewsContoller(@Qualifier("newsService") BaseService<NewsDtoRequest, NewsDtoResponse, Long> model,
+                            @Qualifier("newsView") View<NewsDtoResponse, List<NewsDtoResponse>> view) {
+        this.model = model;
+        this.view = view;
+    }
 
     @Override
     public List<NewsDtoResponse> readAll() {

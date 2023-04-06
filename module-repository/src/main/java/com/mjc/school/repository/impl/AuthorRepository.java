@@ -10,15 +10,18 @@ import java.util.List;
 
 import com.mjc.school.repository.model.impl.AuthorModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Getter
 @Setter
 @Repository("authorRepository")
 public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
-
+    private final DataSource dataSource;
     @Autowired
-    private DataSource dataSource;
+    public AuthorRepository(@Qualifier("dataSource") DataSource dataSource){
+        this.dataSource = dataSource;
+    }
 
     @Override
     public List<AuthorModel> readAll() {

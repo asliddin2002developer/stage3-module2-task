@@ -13,16 +13,15 @@ import java.util.List;
 
 @Component("authorController")
 public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> {
-
-    @Autowired
-    @Qualifier("authorService")
-    private BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> model;
-    @Autowired
-    @Qualifier("authorView")
-    private View<AuthorDtoResponse, List<AuthorDtoResponse>> view;
+    private final BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> model;
+    private final View<AuthorDtoResponse, List<AuthorDtoResponse>> view;
     private AuthorDtoResponse author;
 
-    public AuthorController() {
+    @Autowired
+    public AuthorController(@Qualifier("authorService") BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> model,
+                            @Qualifier("authorView") View<AuthorDtoResponse, List<AuthorDtoResponse>> view) {
+        this.model = model;
+        this.view = view;
     }
 
     @Override

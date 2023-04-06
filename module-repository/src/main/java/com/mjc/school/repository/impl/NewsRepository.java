@@ -8,6 +8,7 @@ import com.mjc.school.repository.exception.NotFoundException;
 import com.mjc.school.repository.model.impl.NewsModel;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,8 +17,12 @@ import java.util.List;
 @Setter
 @Repository("newsRepository")
 public class NewsRepository implements BaseRepository<NewsModel, Long> {
+    private final DataSource dataSource;
     @Autowired
-    private DataSource dataSource;
+    public NewsRepository(@Qualifier("dataSource") DataSource dataSource){
+        this.dataSource = dataSource;
+    }
+
 
     @Override
     public List<NewsModel> readAll() {

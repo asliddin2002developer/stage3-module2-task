@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component("newsValidatory")
-public class NewsValidator implements Validator<NewsDtoRequest> {
+@Component("newsErrorValidator")
+public class NewsErrorValidator implements Validator<NewsDtoRequest> {
+    private final BaseRepository<AuthorModel, Long> authorRepository;
+
     @Autowired
-    @Qualifier("authorRepository")
-    private BaseRepository<AuthorModel, Long> authorRepository;
+    public NewsErrorValidator(@Qualifier("authorRepository") BaseRepository<AuthorModel, Long> authorRepository){
+        this.authorRepository = authorRepository;
+    }
 
 
     @Override

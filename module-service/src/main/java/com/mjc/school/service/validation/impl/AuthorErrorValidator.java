@@ -5,8 +5,8 @@ import com.mjc.school.service.enums.ConstantValidators;
 import com.mjc.school.service.validation.Validator;
 import org.springframework.stereotype.Component;
 
-@Component("authorValidator")
-public class AuthorValidator implements Validator<AuthorDtoRequest> {
+@Component("authorErrorValidator")
+public class AuthorErrorValidator implements Validator<AuthorDtoRequest> {
 
     @Override
     public boolean isValidParams(AuthorDtoRequest authorDtoRequest){

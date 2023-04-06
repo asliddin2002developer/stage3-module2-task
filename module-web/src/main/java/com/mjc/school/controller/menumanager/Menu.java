@@ -1,4 +1,4 @@
-package com.mjc.school.controller.manager;
+package com.mjc.school.controller.menumanager;
 
 import org.springframework.stereotype.Component;
 
