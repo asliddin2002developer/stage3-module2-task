@@ -8,15 +8,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class Main {
     public static void main(String[] args){
-        try (var c = new AnnotationConfigApplicationContext(ProjectConfig.class)) {
-           var crud = c.getBean(MenuManager.class);
-           while (true) {
-               try {
-                   crud.manageCrud();
-               }catch(Exception e){
-                   e.printStackTrace();
-               }
-           }
+        try (var context = new AnnotationConfigApplicationContext(ProjectConfig.class)) {
+           var menuManager = context.getBean(MenuManager.class);
+           menuManager.run();
         }
     }
 }
