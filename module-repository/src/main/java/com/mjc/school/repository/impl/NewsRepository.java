@@ -21,7 +21,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public List<NewsModel> readAll() {
-        return dataSource.getNewsDataSource();
+        return dataSource.getNewsDataList();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
         entity.setId(NewsModel.getCount());
         entity.setCreateDate(Utils.getRandomDate());
         entity.setLastUpdateDate(Utils.getRandomDate());
-        dataSource.addNewsToDataSource(entity);
+        dataSource.addNewsToDataList(entity);
         return entity;
     }
     @Override
@@ -49,7 +49,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     @Override
     public boolean deleteById(Long id) {
         NewsModel news = findById(id);
-        dataSource.getNewsDataSource().remove(news);
+        dataSource.getNewsDataList().remove(news);
         return true;
     }
     @Override
@@ -64,7 +64,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public NewsModel findById(Long id){
-        for (NewsModel news : dataSource.getNewsDataSource()){
+        for (NewsModel news : dataSource.getNewsDataList()){
             if (news.getId().equals(id)){
                 return news;
             }

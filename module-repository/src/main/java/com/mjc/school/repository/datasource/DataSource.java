@@ -11,24 +11,24 @@ import java.util.Random;
 
 @Component("dataSource")
 public class DataSource {
-    private final List<NewsModel> newsDataSource;
-    private final List<AuthorModel> authorsDataSource;
+    private final List<NewsModel> newsDataList;
+    private final List<AuthorModel> authorDataList;
 
     public DataSource(){
-        authorsDataSource = new ArrayList<>();
-        newsDataSource = new ArrayList<>();
-        fillAuthorsDataSource();
-        fillNewsDataSource();
+        authorDataList = new ArrayList<>();
+        newsDataList = new ArrayList<>();
+        fillAuthorsDataList();
+        fillNewsDataList();
     }
 
 
-    public void fillNewsDataSource(){
+    public void fillNewsDataList(){
         Random r = new Random();
         for (int i = 1; i <= 20; i++) {
-            this.newsDataSource.add(new NewsModel(
+            this.newsDataList.add(new NewsModel(
                     Utils.getRandomContentByFilePath("news"),
                     Utils.getRandomContentByFilePath("content"),
-                    (long) r.nextInt(authorsDataSource.size()),
+                    (long) r.nextInt(authorDataList.size()),
                     Utils.getRandomDate(),
                     Utils.getRandomDate()
 
@@ -36,26 +36,26 @@ public class DataSource {
         }
     }
 
-    public void fillAuthorsDataSource(){
+    public void fillAuthorsDataList(){
         for(int i=1; i<=20; i++){
-            this.authorsDataSource.add(new AuthorModel(
+            this.authorDataList.add(new AuthorModel(
                     Utils.getRandomContentByFilePath("authors")
             ));
         }
     }
 
-    public List<NewsModel> getNewsDataSource(){
-        return newsDataSource;
+    public List<NewsModel> getNewsDataList(){
+        return newsDataList;
     }
-    public List<AuthorModel> getAuthorsDataSource(){
-        return this.authorsDataSource;
+    public List<AuthorModel> getAuthorDataList(){
+        return this.authorDataList;
     }
 
-    public void addNewsToDataSource(NewsModel news){
-        newsDataSource.add(news);
+    public void addNewsToDataList(NewsModel news){
+        newsDataList.add(news);
     }
-    public void addAuthorToDataSource(AuthorModel author){
-        authorsDataSource.add(author);
+    public void addAuthorToDataList(AuthorModel author){
+        authorDataList.add(author);
     }
 
 

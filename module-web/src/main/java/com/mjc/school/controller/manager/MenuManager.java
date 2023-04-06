@@ -1,5 +1,6 @@
-package com.mjc.school.controller;
+package com.mjc.school.controller.manager;
 
+import com.mjc.school.controller.BaseController;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;
 import com.mjc.school.service.dto.NewsDtoRequest;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component("crudImpl")
-public class CrudImpl {
+@Component("menuManager")
+public class MenuManager {
     @Autowired
     @Qualifier("authorController")
     private BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController;
@@ -22,67 +23,70 @@ public class CrudImpl {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public void implementCrud(){
+    public void manageCrud(){
         menu();
         String command = scanner.nextLine();
         switch(command){
             case "1":
                 authorController.readAll();
-                System.out.println("SUCCESS");
                 break;
             case "2":
-                System.out.println("Enter ID: ");
-                String var1 = scanner.nextLine();
-                authorController.readById(isValidId(var1));
-                System.out.println("SUCCESS");
+                long authorId = this.isValidId(ask("Enter author ID: "));
+                authorController.readById(authorId);
                 break;
             case "3":
-                System.out.print("Enter author NAME: ");
-                String name = scanner.nextLine();
+                String name = ask("Enter author NAME: ");
                 authorController.create(new AuthorDtoRequest(name));
-                System.out.println("SUCCESS");
                 break;
             case "4":
-                System.out.print("Enter author ID: ");
-                long id = this.isValidId(scanner.nextLine());
-                System.out.print("Enter author NAME: (update)");
-                name = scanner.nextLine();
-                authorController.update(new AuthorDtoRequest(id, name));
-                System.out.println("SUCCESS");
+                authorId = this.isValidId(ask("Enter author ID: "));
+                name = ask("Enter author NAME: (update)");
+                authorController.update(new AuthorDtoRequest(authorId, name));
                 break;
             case "5":
-                System.out.print("Enter author ID: ");
-                id = this.isValidId(scanner.nextLine());
-                authorController.deleteById(id);
-                System.out.println("SUCCESS");
+                authorId = this.isValidId(ask("Enter author ID: "));
+                authorController.deleteById(authorId);
                 break;
             case "6":
                 newsController.readAll();
-                System.out.println("SUCCESS");
                 break;
             case "7":
-                System.out.print("Enter news ID: ");
-                id = this.isValidId(scanner.nextLine());
-                newsController.readById(id);
-                System.out.println("SUCCESS");
+                long newsId = this.isValidId(ask("Enter news ID: "));
+                newsController.readById(newsId);
                 break;
             case "8":
-                System.out.print("Enter news TITLE: ");
-                String title = scanner.nextLine();
-                System.out.print("Enter news CONTENT: ");
-                String content = scanner.nextLine();
-                System.out.print("Enter author ID: ");
-                id = this.isValidId(scanner.nextLine());
-                var newsDto = new NewsDtoRequest(title, content, id);
-                newsController.create(newsDto);
+                String title = ask("Enter news TITLE: ");
+                String content = ask("Enter news CONTENT: ");
+                authorId = this.isValidId(ask("Enter author ID: "));
+                newsController.create(new NewsDtoRequest(title, content, authorId));
+                break;
+            case "9":
+                newsId = this.isValidId("Enter new ID: ");
+                title = ask("Enter news TITLE: ");
+                content = ask("Enter news CONTENT: ");
+                authorId = this.isValidId(ask("Enter author ID: "));
+                newsController.update(new NewsDtoRequest(newsId, title, content, authorId));
+                break;
+            case "10":
+                newsId = this.isValidId(ask("Enter news ID: "));
+                newsController.deleteById(newsId);
+                break;
+            case "0":
+                System.exit(0);
         }
+    }
+
+    public String ask(String message){
+        System.out.print(message);
+        return scanner.nextLine();
+
     }
 
     public Long isValidId(String id){
         try{
             return Long.valueOf(id);
         }catch(Exception e){
-            throw new RuntimeException();
+            throw new RuntimeException("ID is not valid!");
         }
     }
 

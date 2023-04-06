@@ -22,7 +22,7 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @Override
     public List<AuthorModel> readAll() {
-        return dataSource.getAuthorsDataSource();
+        return dataSource.getAuthorDataList();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @Override
     public AuthorModel create(AuthorModel entity) {
-        dataSource.addAuthorToDataSource(entity);
+        dataSource.addAuthorToDataList(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
     @Override
     public boolean deleteById(Long id) {
         AuthorModel author = findById(id);
-        dataSource.getAuthorsDataSource().remove(author);
+        dataSource.getAuthorDataList().remove(author);
         return true;
     }
 
@@ -71,7 +71,7 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @Override
     public AuthorModel findById(Long id) {
-        for (AuthorModel author : dataSource.getAuthorsDataSource()) {
+        for (AuthorModel author : dataSource.getAuthorDataList()) {
             if (author.getId().equals(id)) {
                 return author;
             }
