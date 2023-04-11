@@ -23,8 +23,6 @@ public class NewsContoller implements BaseController<NewsDtoRequest, NewsDtoResp
         this.model = model;
         this.view = view;
     }
-
-    @Override
     public List<NewsDtoResponse> readAll() {
         var newsList = model.readAll();
         view.displayAll(newsList);

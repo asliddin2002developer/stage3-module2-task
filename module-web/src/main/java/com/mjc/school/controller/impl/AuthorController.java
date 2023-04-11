@@ -1,6 +1,8 @@
 package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
+import com.mjc.school.controller.annotations.CommandBody;
+import com.mjc.school.controller.annotations.CommandParam;
 import com.mjc.school.controller.annotations.OnDelete;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDtoRequest;
@@ -33,31 +35,34 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
     }
 
     @Override
-    public AuthorDtoResponse readById(Long id) {
-        this.author = model.readById(id);
+    public AuthorDtoResponse readById(@CommandParam("authorId") Long authorId) {
+        this.author = model.readById(authorId);
         view.display(author);
         return this.author;
     }
 
     @Override
-    public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
+    public AuthorDtoResponse create(@CommandBody AuthorDtoRequest createRequest) {
         this.author = model.create(createRequest);
         view.display(author);
         return this.author;
     }
 
     @Override
-    public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
+    public AuthorDtoResponse update(@CommandBody AuthorDtoRequest updateRequest) {
         this.author = model.update(updateRequest);
         view.display(author);
         return this.author;
     }
 
-    @OnDelete()
+
+
+    @OnDelete
     @Override
-    public boolean deleteById(Long id) {
-        var resp = model.deleteById(id);
+    public boolean deleteById(@CommandParam("authorId") Long authorId) {
+        var resp = model.deleteById(authorId);
         System.out.println(resp);
         return resp;
     }
+
 }
