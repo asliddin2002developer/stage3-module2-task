@@ -2,7 +2,7 @@ package com.mjc.school.main;
 
 
 import com.mjc.school.config.ProjectConfig;
-import com.mjc.school.menumanager.MenuManager;
+import com.mjc.school.controller.menumanager.MenuManager;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {

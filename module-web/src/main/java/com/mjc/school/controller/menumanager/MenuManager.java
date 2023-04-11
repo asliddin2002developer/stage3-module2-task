@@ -1,6 +1,6 @@
-package com.mjc.school.menumanager;
+package com.mjc.school.controller.menumanager;
 
-import com.mjc.school.command.CommandDispatcher;
+import com.mjc.school.controller.command.CommandDispatcher;
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;

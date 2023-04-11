@@ -17,7 +17,7 @@ public interface BaseController<T, R, K> {
     R create(@CommandBody T createRequest);
 
     @CommandHandler("update")
-    R update(@CommandBody T updateRequest);
+    R   update(@CommandBody T updateRequest);
 
     @CommandHandler(("deleteById"))
     boolean deleteById(K id);
