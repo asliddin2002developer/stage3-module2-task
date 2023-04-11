@@ -2,6 +2,7 @@ package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.annotations.CommandBody;
+import com.mjc.school.controller.annotations.CommandHandler;
 import com.mjc.school.controller.annotations.CommandParam;
 import com.mjc.school.controller.annotations.OnDelete;
 import com.mjc.school.service.BaseService;
@@ -27,6 +28,7 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
         this.view = view;
     }
 
+    @CommandHandler
     @Override
     public List<AuthorDtoResponse> readAll() {
         var authors = model.readAll();
@@ -34,6 +36,7 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
         return authors;
     }
 
+    @CommandHandler
     @Override
     public AuthorDtoResponse readById(@CommandParam("authorId") Long authorId) {
         this.author = model.readById(authorId);
@@ -41,6 +44,7 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
         return this.author;
     }
 
+    @CommandHandler
     @Override
     public AuthorDtoResponse create(@CommandBody AuthorDtoRequest createRequest) {
         this.author = model.create(createRequest);
@@ -48,6 +52,7 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
         return this.author;
     }
 
+    @CommandHandler
     @Override
     public AuthorDtoResponse update(@CommandBody AuthorDtoRequest updateRequest) {
         this.author = model.update(updateRequest);
@@ -55,10 +60,8 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
         return this.author;
     }
 
-
-
+    @CommandHandler
     @OnDelete
-    @Override
     public boolean deleteById(@CommandParam("authorId") Long authorId) {
         var resp = model.deleteById(authorId);
         System.out.println(resp);

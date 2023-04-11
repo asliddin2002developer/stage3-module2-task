@@ -2,24 +2,25 @@ package com.mjc.school.controller;
 
 import com.mjc.school.controller.annotations.CommandBody;
 import com.mjc.school.controller.annotations.CommandHandler;
+import com.mjc.school.controller.annotations.CommandParam;
 
 import java.util.List;
 
 public interface BaseController<T, R, K> {
 
-    @CommandHandler("readAll")
+    @CommandHandler
     List<R> readAll();
 
-    @CommandHandler(("readById"))
-    R readById(K id);
+    @CommandHandler
+    R readById(@CommandParam("id") K id);
 
-    @CommandHandler("create")
+    @CommandHandler
     R create(@CommandBody T createRequest);
 
-    @CommandHandler("update")
+    @CommandHandler
     R   update(@CommandBody T updateRequest);
 
-    @CommandHandler(("deleteById"))
-    boolean deleteById(K id);
+    @CommandHandler
+    boolean deleteById(@CommandParam("id") K id);
 
 }

@@ -1,6 +1,7 @@
 package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
+import com.mjc.school.controller.annotations.CommandHandler;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
@@ -23,34 +24,35 @@ public class NewsContoller implements BaseController<NewsDtoRequest, NewsDtoResp
         this.model = model;
         this.view = view;
     }
+    @CommandHandler
     public List<NewsDtoResponse> readAll() {
         var newsList = model.readAll();
         view.displayAll(newsList);
         return newsList;
     }
 
-    @Override
+    @CommandHandler
     public NewsDtoResponse readById(Long id) {
         this.news = model.readById(id);
         view.display(this.news);
         return this.news;
     }
 
-    @Override
+    @CommandHandler
     public NewsDtoResponse create(NewsDtoRequest createRequest) {
         this.news = model.create(createRequest);
         view.display(this.news);
         return this.news;
     }
 
-    @Override
+    @CommandHandler
     public NewsDtoResponse update(NewsDtoRequest updateRequest) {
         this.news = model.update(updateRequest);
         view.display(this.news);
         return this.news;
     }
 
-    @Override
+    @CommandHandler
     public boolean deleteById(Long id) {
         return model.deleteById(id);
     }
