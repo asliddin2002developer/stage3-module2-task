@@ -23,12 +23,6 @@ public class AuthorModel implements BaseEntity<Long> {
         this.lastUpdateDate = Utils.getRandomDate();
     }
 
-//    public AuthorModel(Long id, String name){
-//        this.id = id;
-//        this.name = name;
-//    }
-
-
     @Override
     public String toString() {
         return "AuthorModel{" +

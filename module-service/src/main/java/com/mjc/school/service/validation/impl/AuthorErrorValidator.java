@@ -11,8 +11,7 @@ public class AuthorErrorValidator implements Validator<AuthorDtoRequest> {
     @Override
     public boolean isValidParams(AuthorDtoRequest authorDtoRequest){
         if (authorDtoRequest.getName().length() < 3 || authorDtoRequest.getName().length() > 15){
-            System.err.println(ConstantValidators.AUTHOR_NAME_LENGTH_IS_NOT_VALID.getMessage());
-            return false;
+            throw new RuntimeException(ConstantValidators.AUTHOR_NAME_LENGTH_IS_NOT_VALID.getMessage());
         }
         return true;
     }

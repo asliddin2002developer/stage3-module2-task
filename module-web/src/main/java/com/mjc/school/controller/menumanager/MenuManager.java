@@ -27,57 +27,60 @@ public class MenuManager {
         this.menu = menu;
     }
 
+
     public void run() {
+        long authorId;
+        long newsId;
+        String name;
+        String title;
+        String content;
         while (true) {
             menu.display();
             String choice = inputHandler.ask("");
             switch (choice) {
-                case Menu.READ_ALL_AUTHORS:
-                    authorController.readAll();
-                    break;
-                case Menu.READ_AUTHOR_BY_ID:
-                    long authorId = inputHandler.isValidId(inputHandler.ask("Enter author ID: "));
+                case Menu.READ_ALL_AUTHORS -> authorController.readAll();
+
+                case Menu.READ_AUTHOR_BY_ID -> {
+                    authorId = inputHandler.isValidId(inputHandler.ask("Enter author ID: "));
                     authorController.readById(authorId);
-                    break;
-                case Menu.CREATE_AUTHOR:
-                    String name = inputHandler.ask("Enter author NAME: ");
+                }
+                case Menu.CREATE_AUTHOR -> {
+                    name = inputHandler.ask("Enter author NAME: ");
                     authorController.create(new AuthorDtoRequest(name));
-                    break;
-                case Menu.UPDATE_AUTHOR:
+                }
+                case Menu.UPDATE_AUTHOR -> {
                     authorId = inputHandler.isValidId(inputHandler.ask("Enter author ID: "));
                     name = inputHandler.ask("Enter author NAME: (update)");
                     authorController.update(new AuthorDtoRequest(authorId, name));
-                    break;
-                case Menu.DELETE_AUTHOR_BY_ID:
+                }
+                case Menu.DELETE_AUTHOR_BY_ID -> {
                     authorId = inputHandler.isValidId(inputHandler.ask("Enter author ID: "));
                     authorController.deleteById(authorId);
-                    break;
-                case Menu.READ_ALL_NEWS:
-                    newsController.readAll();
-                    break;
-                case Menu.READ_NEWS_BY_ID:
-                    long newsId = inputHandler.isValidId(inputHandler.ask("Enter news ID: : "));
+                }
+                case Menu.READ_ALL_NEWS -> newsController.readAll();
+
+                case Menu.READ_NEWS_BY_ID -> {
+                    newsId = inputHandler.isValidId(inputHandler.ask("Enter news ID: : "));
                     newsController.readById(newsId);
-                    break;
-                case Menu.CREATE_NEWS:
-                    String title = inputHandler.ask("Enter news TITLE: ");
-                    String content = inputHandler.ask("Enter news CONTENT: ");
-                    authorId = inputHandler.isValidId(inputHandler.ask("Enter news ID: : "));
+                }
+                case Menu.CREATE_NEWS -> {
+                    title = inputHandler.ask("Enter news TITLE: ");
+                    content = inputHandler.ask("Enter news CONTENT: ");
+                    authorId = inputHandler.isValidId(inputHandler.ask("Enter author ID: : "));
                     newsController.create(new NewsDtoRequest(title, content, authorId));
-                    break;
-                case Menu.UPDATE_NEWS:
+                }
+                case Menu.UPDATE_NEWS -> {
                     newsId = inputHandler.isValidId(inputHandler.ask("Enter news ID: : "));
                     title = inputHandler.ask("Enter news TITLE: ");
                     content = inputHandler.ask("Enter news CONTENT: ");
                     authorId = inputHandler.isValidId(inputHandler.ask("Enter news ID: : "));
                     newsController.update(new NewsDtoRequest(newsId, title, content, authorId));
-                    break;
-                case Menu.DELETE_NEWS_BY_ID:
+                }
+                case Menu.DELETE_NEWS_BY_ID -> {
                     newsId = inputHandler.isValidId(inputHandler.ask("Enter news ID: : "));
                     newsController.deleteById(newsId);
-                    break;
-                case Menu.EXIT:
-                    System.exit(0);
+                }
+                case Menu.EXIT -> System.exit(0);
             }
         }
     }

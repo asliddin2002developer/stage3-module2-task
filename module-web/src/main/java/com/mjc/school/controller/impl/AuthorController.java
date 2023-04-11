@@ -1,17 +1,18 @@
 package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
+import com.mjc.school.controller.annotations.OnDelete;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;
 import com.mjc.school.service.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Component("authorController")
+@Controller("authorController")
 public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> {
     private final BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> model;
     private final View<AuthorDtoResponse, List<AuthorDtoResponse>> view;
@@ -52,8 +53,11 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
         return this.author;
     }
 
+    @OnDelete()
     @Override
     public boolean deleteById(Long id) {
-        return model.deleteById(id);
+        var resp = model.deleteById(id);
+        System.out.println(resp);
+        return resp;
     }
 }

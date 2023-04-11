@@ -1,14 +1,11 @@
 package com.mjc.school.service.impl;
 
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.model.impl.AuthorModel;
 import com.mjc.school.repository.model.impl.NewsModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
-import com.mjc.school.service.mapper.AuthorMapper;
 import com.mjc.school.service.mapper.NewsMapper;
-import com.mjc.school.service.validation.impl.AuthorErrorValidator;
 import com.mjc.school.service.validation.impl.NewsErrorValidator;
 
 import org.mapstruct.factory.Mappers;
